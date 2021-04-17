@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 
 import resolvers from "./graphql/resolvers";
 import typeDefs from "./graphql/typeDefs";
+import { debug } from "./utils/logger";
 
 const server = new ApolloServer({
     typeDefs,
@@ -14,9 +15,9 @@ const server = new ApolloServer({
 mongoose
     .connect(process.env.MONGODB_URL || "", { useNewUrlParser: true })
     .then(() => {
-        console.log('MongoDB Connected');
+        debug('API', 'MongoDB Connected');
         return server.listen({ port: process.env.SERVER_PORT || 5000 });
     })
     .then((res: any) => {
-        console.log(`Server running at ${res.url}`);
+        debug('API', `Server running at ${res.url}`)
     });
