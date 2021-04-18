@@ -1,23 +1,34 @@
 import "dotenv-safe/config";
 
-import { ApolloServer } from "apollo-server";
+import { ApolloServer, PubSub } from "apollo-server";
 import mongoose from "mongoose";
 
 import resolvers from "./graphql/resolvers";
 import typeDefs from "./graphql/typeDefs";
-import { debug } from "./utils/logger";
+import { debug, error } from "./utils/logger";
+
+const pubsub = new PubSub();
+
+const props = {
+    port: process.env.SERVER_PORT || 5000,
+    mongodb: process.env.MONGODB_URL || ""
+}
 
 const server = new ApolloServer({
     typeDefs,
-    resolvers
+    resolvers,
+    context: ({ req }) => ({ req, pubsub })
 });
 
 mongoose
-    .connect(process.env.MONGODB_URL || "", { useNewUrlParser: true })
+    .connect(props.mongodb, { useNewUrlParser: true })
     .then(() => {
-        debug('API', 'MongoDB Connected');
-        return server.listen({ port: process.env.SERVER_PORT || 5000 });
+        debug('API', 'MongoDB connected');
+        return server.listen({ port: props.port });
     })
     .then((res: any) => {
         debug('API', `Server running at ${res.url}`)
-    });
+    })
+    .catch(err => {
+        error(err);
+    })
