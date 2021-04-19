@@ -1,5 +1,5 @@
 const debug = (service: string, ...logItems: any) => {
-  console.log(`${service} |`, ...logItems);
+  console.log(`${service.toUpperCase()} |`, ...logItems);
 };
 
 const error = (...logItems: any) => {

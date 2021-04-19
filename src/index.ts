@@ -23,11 +23,11 @@ const server = new ApolloServer({
 mongoose
     .connect(props.mongodb, { useNewUrlParser: true })
     .then(() => {
-        debug('API', 'MongoDB connected');
+        debug('api', 'MongoDB connected');
         return server.listen({ port: props.port });
     })
     .then((res: any) => {
-        debug('API', `Server running at ${res.url}`)
+        debug('api', `Server running at ${res.url}`)
     })
     .catch(err => {
         error(err);
