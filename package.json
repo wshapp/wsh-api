@@ -4,12 +4,11 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "yarn tsc",
-    "watch": "tsc -w",
-    "serve": "node dist/index",
-    "dev": "nodemon --exec ts-node src/index",
     "start": "node dist/index",
-    "tsc": "tsc"
+    "postinstall": "tsc",
+    "dev": "nodemon --exec ts-node src/index",
+    "watch": "tsc -w",
+    "deploy": "git add . && git commit -m \"🚀 deployment\" && git push heroku master"
   },
   "devDependencies": {
     "apollo-server": "^2.22.2",
