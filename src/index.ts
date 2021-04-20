@@ -10,7 +10,7 @@ import { debug, error } from "./utils/logger";
 const pubsub = new PubSub();
 
 const props = {
-    port: process.env.SERVER_PORT || 5000,
+    port: process.env.PORT || 5000,
     mongodb: process.env.MONGODB_URL || ""
 }
 
