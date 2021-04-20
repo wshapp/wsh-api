@@ -4,11 +4,12 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
+    "build": "yarn tsx",
     "watch": "tsc -w",
     "serve": "node dist/index",
     "dev": "nodemon --exec ts-node src/index",
-    "start": "npm run build && node dist/index"
+    "start": "node dist/index",
+    "tsc": "tsc"
   },
   "devDependencies": {
     "apollo-server": "^2.22.2",
