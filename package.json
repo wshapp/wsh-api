@@ -10,6 +10,9 @@
     "watch": "tsc -w",
     "deploy": "git add . && git commit -m \"🚀 deployment\" && git push heroku master"
   },
+  "dependencies": {
+    "typescript": "^4.2.4"
+  },
   "devDependencies": {
     "apollo-server": "^2.22.2",
     "bcryptjs": "^2.4.3",
